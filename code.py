@@ -8,12 +8,6 @@ dataset = pd.read_csv('house_prices.csv')
 X= dataset.iloc[:,[0,2,3,5,6,7]].values
 Y=dataset.iloc[:,8].values
 
-#removing missing values
-from sklearn.preprocessing import Imputer
-imp=Imputer(missing_values="NaN",strategy="mean",axis=0)
-imp.fit(X)
-X=imp.transform(X)
-
 #LABEL ENCODING
 from sklearn.preprocessing import LabelEncoder,OneHotEncoder
 labenc_X = LabelEncoder()
@@ -22,6 +16,12 @@ labenc_X = LabelEncoder()
 X[:,0]=labenc_X.fit_transform(X[:,0])
 X[:,1]=labenc_X.fit_transform(X[:,1])
 X[:,2]=labenc_X.fit_transform(X[:,2])
+
+#removing missing values
+from sklearn.preprocessing import Imputer
+imp=Imputer(missing_values="NaN",strategy="mean",axis=0)
+imp.fit(X)
+X=imp.transform(X)
 
 #Splitting data sets into training and testing sets
 from sklearn.cross_validation import train_test_split
